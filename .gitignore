@@ -1,4 +1,7 @@
-/data
+data/*
 *.swp
 *~
 *.pyc
+
+# this allows me to preserve the data folder by adding an empty .gitkeep file to it
+!.gitkeep
