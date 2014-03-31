@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from datascrape import mass_downloader
+from datascrape import mass_downloader, download_file
 
 data_sources = [
     {
@@ -34,6 +34,9 @@ def get_data(sources):
 
 def main():
     get_data(data_sources)
+    #download list of public schools
+    download_file("ftp://ftp.cde.ca.gov/demo/schlname/pubschls.txt",
+                  "pubschls")
 
 
 if __name__ == '__main__':
