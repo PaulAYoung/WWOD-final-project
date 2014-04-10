@@ -3,5 +3,3 @@ requests
 beautifulsoup4
 --allow-external dbf
 dbf
---allow-external csvkit
-csvkit
