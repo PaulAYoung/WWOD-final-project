@@ -36,10 +36,11 @@ def get_data(sources):
 
 def main():
     args = sys.argv
-    if len(args) == 1:
-        data = data_sources[int(args[0])]
-    elif len(args) == 2:
-        data = data_sources[int(args[0]):int(args[1])]
+    print args
+    if len(args) == 2:
+        data = [data_sources[int(args[1])]]
+    elif len(args) == 3:
+        data = data_sources[int(args[1]):int(args[2])]
     else:
         data = data_sources
 
