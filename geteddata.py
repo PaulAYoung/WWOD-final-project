@@ -62,6 +62,7 @@ def main():
         sources = data_sets.values()
         get_data(sources)
     elif len(opts.data) > 0:
+        print opts.data
         for i in opts.data:
             if i in data_sets:
                 sources.append(data_sets[i])
@@ -70,6 +71,7 @@ def main():
                 print "Please review data sets and retry."
                 list_data_sets()
                 raise Exception("Invalid data source.")
+            print sources
             get_data(sources)
     else:
         print "No data sets specified."
