@@ -1,56 +1,78 @@
 #!/usr/bin/env python
 
-import sys
+import argparse
+import os
 
 from datascrape import mass_downloader, download_file
-
-data_sources = [
-    {
-        'url': "http://www.cde.ca.gov/ds/sd/sd/filesgrads.asp",
-        'href_pattern': "",
-        'inner_pattern': r"grads\d\d"
-    },
-    {
-        'url': "http://www.cde.ca.gov/ds/sd/sd/filesgradaf.asp",
-        'href_pattern': "",
-        'inner_pattern': r"gradaf\d\d"
-    },
-    {
-        'url': "http://www.cde.ca.gov/ds/sd/sd/filesenr.asp",
-        'href_pattern': "",
-        'inner_pattern': r"enr\d\d"
-    },
-    {
-        'url': "http://www.cde.ca.gov/ds/sd/sd/filesdropouts.asp",
-        'href_pattern': "",
-        'inner_pattern': r"dropouts\d\d"
-    }
-    ]
+from datasources import data_sets
 
 
 def get_data(sources):
     for source in sources:
-        print source
-        mass_downloader(**source)
+        outpath = os.path.join(os.path.curdir, 'data')
+        if type(source) == dict:
+            mass_downloader(out_dir=outpath, retry=True, **source)
+        elif type(source) == str:
+            path = os.path.split(os.path.splitext(source)[0])[1]
+            path = os.path.join(outpath, path)
+            download_file(source, path, retry=True)
+        else:
+            raise Exception("Data source in invalid format")
+
+
+def list_data_sets():
+    """docstring for list_data_sets"""
+    sources = data_sets.keys()
+    sources.sort()
+    print "Data sets:"
+    for d in sources:
+        print "\t - {}".format(d)
 
 
 def main():
-    args = sys.argv
-    print args
-    if len(args) == 2:
-        data = [data_sources[int(args[1])]]
-    elif len(args) == 3:
-        data = data_sources[int(args[1]):int(args[2])]
-    else:
-        data = data_sources
-
-    get_data(data)
-    #download list of public schools
-    download_file(
-        "ftp://ftp.cde.ca.gov/demo/schlname/pubschls.txt",
-        "pubschls",
-        retry=True
+    parser = argparse.ArgumentParser(description="Download data sets")
+    parser.add_argument(
+        'data',
+        type=str,
+        nargs='*',
+        help="A list of datasets to be downloaded."
         )
+    parser.add_argument(
+        '-a',
+        '-all',
+        help="This option indicates all data sets should be downloaded.",
+        action="store_true"
+        )
+    parser.add_argument(
+        '-l',
+        '-ls',
+        help="List all available data sources",
+        action="store_true"
+        )
+
+    opts = parser.parse_args()
+
+    sources = []
+    if opts.l:
+        list_data_sets()
+    elif opts.a and len(opts.data) > 0:
+        print "You can't specify specific data sets and all"
+    elif opts.a:
+        print "Downloading all data."
+        sources = data_sets.values()
+        get_data(sources)
+    elif len(opts.data) > 0:
+        for i in opts.data:
+            if i in data_sets:
+                sources.append(data_sets[i])
+            else:
+                print "{} not found".format(i)
+                print "Please review data sets and retry."
+                list_data_sets()
+                raise Exception("Invalid data source.")
+            get_data(sources)
+    else:
+        print "No data sets specified."
 
 
 if __name__ == '__main__':

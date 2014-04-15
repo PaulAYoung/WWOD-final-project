@@ -60,6 +60,7 @@ def download_file(url, outpath, retry=False):
 
 def mass_downloader(
         url,
+        out_dir="",
         href_pattern=False,
         inner_pattern=False,
         wait=0.05,
@@ -97,6 +98,6 @@ def mass_downloader(
                 get_flag = False
         if get_flag:
             # download file
-            outpath = os.path.join("data", inner)
+            outpath = os.path.join(out_dir, inner)
             download_file(href, link.get(href, outpath), retry=retry)
             sleep(wait)
