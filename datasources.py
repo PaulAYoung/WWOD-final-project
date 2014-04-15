@@ -29,7 +29,7 @@ data_sets = {
     {
         'url': "http://www.cde.ca.gov/ds/sd/df/filesassign.asp",
         'href_pattern': "",
-        'inner_pattern': r"assign\d\d|staffassign\d\d"
+        'inner_pattern': r"assign\w?\d\d|staffassign\d\d"
     },
 
     "SchoolList": "ftp://ftp.cde.ca.gov/demo/schlname/pubschls.txt",
