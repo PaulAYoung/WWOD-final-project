@@ -25,6 +25,13 @@ data_sets = {
         'href_pattern': "",
         'inner_pattern': r"dropouts\d\d"
     },
+    "staffassignments":
+    {
+        'url': "http://www.cde.ca.gov/ds/sd/df/filesassign.asp",
+        'href_pattern': "",
+        'inner_pattern': r"assign\d\d|staffassign\d\d"
+    },
+
     "SchoolList": "ftp://ftp.cde.ca.gov/demo/schlname/pubschls.txt",
     "CourseList": "ftp://ftp.cde.ca.gov/demo/paif/asgncode.txt"
     }
