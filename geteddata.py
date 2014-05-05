@@ -2,6 +2,7 @@
 
 import argparse
 import os
+import zipfile
 
 from datascrape import mass_downloader, download_file
 from datasources import data_sets
@@ -18,6 +19,11 @@ def get_data(sources):
             download_file(source, path, retry=True)
         else:
             raise Exception("Data source in invalid format")
+
+        # unzip if file is .zip or .exe
+        if path[-4:].lower() in [".exe", ".zip"]:
+            with zipfile.ZipFile(path, 'r') as z:
+                z.extractall(outpath)
 
 
 def list_data_sets():

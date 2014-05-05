@@ -6,22 +6,10 @@ from datacompiler import combine_datasets
 
 data_profiles = [
     {
-        "pattern": r"gradaf\d\d.txt|GRADAF\d\d.DBF",
-        "columns": "ALL",
-        "makelower": True,
-        "outfile": "graduates.csv"
-    },
-    {
         "pattern": r"dropouts\d\d.txt",
         "columns": "ALL",
         "makelower": True,
         "outfile": "dropouts.csv"
-    },
-    {
-        "pattern": r"grads\d\d.txt",
-        "columns": "ALL",
-        "makelower": True,
-        "outfile": "ucqualifiedgrads.csv"
     },
     {
         "pattern": r"enr\d\d.txt",
@@ -29,7 +17,6 @@ data_profiles = [
         "makelower": True,
         "outfile": "enrollment.csv"
     }
-
     ]
 
 
