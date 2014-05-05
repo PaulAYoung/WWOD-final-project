@@ -1,5 +1,7 @@
 data/*
 !data/pubschls.txt
+!data/frpm1213.txt
+!data/CA_FIPS_Listing.csv
 compileddata/*
 *.swp
 *~
