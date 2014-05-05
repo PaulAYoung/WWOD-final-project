@@ -20,5 +20,6 @@ data_sets = {
         'inner_pattern': r"assign\w?\d\d|staffassign\d\d"
     },
     "SchoolList": "ftp://ftp.cde.ca.gov/demo/schlname/pubschls.txt",
-    "CourseList": "ftp://ftp.cde.ca.gov/demo/paif/asgncode.txt"
+    "CourseList": "ftp://ftp.cde.ca.gov/demo/paif/asgncode.txt",
+    "ClassData2010": "ftp://ftp.cde.ca.gov/demo/paif/assign10.txt"
     }
